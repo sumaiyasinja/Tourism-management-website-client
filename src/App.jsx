@@ -1,14 +1,15 @@
-import { Outlet } from "react-router"
+import React from "react";
 
-function App() {
+// import { Outlet } from 'react-router';
+import { Outlet } from "react-router-dom";
+const App=()=> {
 
   return (
-    <div className="bg-blue-500">
-      <h2 className="text-center py-6">Destina Go </h2>
-      <p className="text-center">app</p>
+    <div className="">
+      
       <Outlet></Outlet>
     </div>
   )
 }
 
-export default App
+export default App;
