@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FaUserCheck , FaUserPlus } from "react-icons/fa";
+
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,7 +17,16 @@ const Navbar = () => {
           Home
         </a>
       </li>
-
+      <li>
+        <a
+          href="/"
+          aria-label="All Tourists Spot"
+          title="All Tourists Spot"
+          className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+        >
+          Tourists Spots
+        </a>
+      </li>
       <li>
         <a
           href="/"
@@ -23,14 +34,27 @@ const Navbar = () => {
           title="About us"
           className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
         >
-          About us
+           Add Tourists Spot
         </a>
       </li>
+      <li>
+        <a
+          href="/"
+          aria-label="About us"
+          title="About us"
+          className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+        >
+          MyList
+        </a>
+      </li>
+      
+      
+
     </>
   );
   return (
     <div>
-      <div className="bg-gray-900">
+      <div className="bg-cyan-800">
         <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
           <div className="relative flex items-center justify-between">
             <a
@@ -48,14 +72,25 @@ const Navbar = () => {
               {/* nav links */}
               {NavLinks}
             </ul>
-            <ul className="flex items-center hidden space-x-8 lg:flex">
+            <ul className="flex items-center hidden space-x-2 lg:flex">
               <li>
                 <a
-                  href="/"
-                  className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                  href="/login"
+                  className="inline-flex rounded-lg items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200  shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                  aria-label=" Sign in"
+                  title=" Sign in"
+                  > <span className="mr-2"><FaUserCheck></FaUserCheck></span>
+
+                  Sign in
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/register"
+                  className="inline-flex rounded-lg items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200  shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                   aria-label="Sign up"
                   title="Sign up"
-                >
+                > <span className="mr-2"><FaUserPlus></FaUserPlus></span>
                   Sign up
                 </a>
               </li>

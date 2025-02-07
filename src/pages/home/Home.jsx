@@ -6,11 +6,10 @@ import Banner from "../../components/Banner";
 const Home = () => {
   return (
     <div className="">
-      <Navbar></Navbar>
+      
       {/* banner */}
       <Banner></Banner>
       <p className="text-3xl text-center">Home</p>
-      <Footer></Footer>
     </div>
   );
 };
