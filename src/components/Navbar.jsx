@@ -33,9 +33,9 @@ const Navbar = () => {
       </li>
       <li>
         <a
-          href="/"
-          aria-label="About us"
-          title="About us"
+          href="/addTouristSpot"
+          aria-label=" Add Tourists Spot"
+          title=" Add Tourists Spot"
           className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
         >
            Add Tourists Spot
@@ -43,9 +43,9 @@ const Navbar = () => {
       </li>
       <li>
         <a
-          href="/"
-          aria-label="About us"
-          title="About us"
+          href="/MyList"
+          aria-label="MyList"
+          title="MyList"
           className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
         >
           MyList

@@ -8,7 +8,6 @@ import {
     onAuthStateChanged
 } from 'firebase/auth';
 import { auth } from '../firebase/firebase.config';
-import axios from 'axios';
 
 export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
@@ -56,9 +55,9 @@ const AuthProvider = ({ children }) => {
         return () => unsubscribe();
     }, []);
 
-    // if (loading) {
-    //     return <p>Loading...</p>;
-    // }
+    if (loading) {
+        return <p>Loading...</p>;
+    }
 
     const authInfo = {
         user,
