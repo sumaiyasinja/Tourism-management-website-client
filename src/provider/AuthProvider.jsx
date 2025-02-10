@@ -8,6 +8,7 @@ import {
     onAuthStateChanged
 } from 'firebase/auth';
 import { auth } from '../firebase/firebase.config';
+import axios from 'axios';
 
 export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
@@ -25,26 +26,31 @@ const AuthProvider = ({ children }) => {
     // Email login
     const loginWithEmailPassword = (email, password) => {
         setLoading(true);
-        return signInWithEmailAndPassword(auth, email, password); // Use lowercase 'auth'
+        return signInWithEmailAndPassword(auth, email, password); 
     };
 
     // Logout
     const logOut = () => {
         setLoading(true);
-        return signOut(auth); // Use lowercase 'auth'
+        return signOut(auth);
     };
 
     // Google Sign-In
     const googleSignIn = () => {
         setLoading(true);
-        return signInWithPopup(auth, googleProvider); // Use lowercase 'auth'
+        return signInWithPopup(auth, googleProvider); 
     };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-            console.log(currentUser);
+
+            if (currentUser) {
+               
+                console.log(currentUser);
+            }
             setLoading(false);
+
         });
 
         return () => unsubscribe();

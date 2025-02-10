@@ -3,6 +3,10 @@ import photo from "../../assets/animated (3).gif";
 import { useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../provider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
+import { auth } from "../../firebase/firebase.config";
+import { updateProfile } from "firebase/auth";
+
 
 const Register = () => {   
     const { registerWithEmailPassword, googleSignIn } = useContext(AuthContext);
@@ -15,13 +19,21 @@ const Register = () => {
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        const photoUrl = form.photoUrl.value;
+        const photoURL = form.photoURL.value;
 
-        console.log(`Submitted - Name: ${name}, Email: ${email}, Password: ${password}, Photo URL: ${photoUrl}`);
+        // console.log(`Submitted - Name: ${name}, Email: ${email}, Password: ${password}, Photo URL: ${photoURL}`);
+        const user = {name,email,photoURL }
         
-        registerWithEmailPassword(email, password, name, photoUrl)
+        registerWithEmailPassword(email, password)
             .then(() => {
                 toast.success("Successfully registered");
+                updateProfile(auth.currentUser, { displayName: name, photoURL: photoURL })
+                // POST request to backend
+                axios.post("http://localhost:5000/users",user)
+                .then (res => console.log(res))
+                .catch(err => console.log(err))             
+              
+                //reset
                 form.reset();
                 navigate(location?.state || "/");
             })
@@ -34,6 +46,17 @@ const Register = () => {
         googleSignIn()
             .then(() => {
                 toast.success("Successfully logged in");
+                const user = {
+                    name : auth?.currentUser?.displayName,
+                    email : auth?.currentUser?.email,
+                    photoURL : auth?.currentUser?.photoURL
+                }
+                
+                // POST request to backend
+                axios.post("http://localhost:5000/users",user)
+                .then (res => console.log(res))
+                .catch(err => console.log(err))  
+                // navigate 
                 navigate(location?.state || "/");
             })
             .catch((error) => {
@@ -87,7 +110,7 @@ const Register = () => {
                             className="w-[80%] rounded-lg border border-cyan-600 bg-transparent py-2 pl-4 text-zinc-600 focus:outline-none focus:ring-2 focus:ring-cyan-600/50 md:w-[60%] dark:text-zinc-400"
                             type="text"
                             placeholder="Photo URL"
-                            name="photoUrl"
+                            name="photoURL"
                         />
                         <p className="text-[14px] text-gray-400">
                             Already have an account? <a href="/login" className="text-cyan-600">Log in</a>

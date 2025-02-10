@@ -3,6 +3,8 @@ import photo from "../../assets/animated (4).gif";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
+import { auth } from "../../firebase/firebase.config";
 
 const Login = () => {
   const { loginWithEmailPassword, googleSignIn } = useContext(AuthContext);
@@ -18,7 +20,7 @@ const Login = () => {
 
     loginWithEmailPassword(email, password)
       .then(() => {
-        toast.success("Successfully logged in");
+        toast.success("Successfully logged in")
         form.reset();
         navigate(location?.state || "/");
       })
@@ -29,14 +31,25 @@ const Login = () => {
 
   const handleGoogleSignIn = () => {
     googleSignIn()
-      .then(() => {
-        toast.success("Successfully logged in");
-        navigate(location?.state || "/");
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
-  };
+        .then(() => {
+            toast.success("Successfully logged in");
+            const user = {
+                name : auth?.currentUser?.displayName,
+                email : auth?.currentUser?.email,
+                photoURL : auth?.currentUser?.photoURL
+            }
+            
+            // POST request to backend
+            axios.post("http://localhost:5000/users",user)
+            .then (res => console.log(res))
+            .catch(err => console.log(err))  
+            // navigate 
+            navigate(location?.state || "/");
+        })
+        .catch((error) => {
+            toast.error(error.message);
+        });
+};
 
   return (
     <div>
